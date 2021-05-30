@@ -282,14 +282,7 @@ public class Apartamentos {
 			}
 		}
 
-//		System.out.println("-----------------------------------------------------");
-//		System.out.println("INDICE DE MORADORES COM ORDENAÇÃO");
-//		for(int i = 0; i < indiceMoradores.length; i++) {
-//			if(indiceMoradores[i] != null ) {
-//				System.out.println("Nome: " +indiceMoradores[i].nome);
-//				System.out.println("Indice: " +indiceMoradores[i].indice+"\n");
-//			}
-//		}
+
 	}
 
 	/**
@@ -302,6 +295,24 @@ public class Apartamentos {
 		// Deve ser implementado.
 		// Deve usar o método buscaBinariaRecursivaPorNome (String nome, int ini, int
 		// fim).
+		int indice = buscaBinariaRecursivaPorNome(nome, 0, indiceMoradores.length - 1);
+		int inicio = 0;
+		int fim = apartamentos.length -1;
+		
+		while( inicio <=  fim) {
+			
+			int meio = (inicio + fim) / 2;
+			
+			if(meio == indice) {
+				return apartamentos[meio];
+			}else if(meio < indice) {
+				inicio  = meio +1;
+			}else if( meio > indice) {
+				fim = meio -1;
+			}
+			
+		}
+		
 		return null;
 	}
 
@@ -311,17 +322,14 @@ public class Apartamentos {
 	 * return int Se encontrar retorna o índice para o array de apartamentos. Se não
 	 * encontrar retorna um índice inválido (quantidade total de apartamentos).
 	 */
-	public int buscaBinariaRecursivaPorNome(String nome, int ini, int fim) {
+	private int buscaBinariaRecursivaPorNome(String nome, int ini, int fim) {
 		// Deve ser implementado.
 		// Este método deve ser recursivo, ou seja, no lugar de um laço de repetição
 		// implementar uma função recursiva.
-		
-		
+		int meio = ((int) (ini + fim) / 2);
 
-		int meio = ( (int) (ini + fim) / 2);
-		
 		if (ini > fim) {
-			return 99;
+			return indiceMoradores.length;
 		}
 
 		if (indiceMoradores[meio] != null && indiceMoradores[meio].nome.equals(nome)) {
@@ -330,12 +338,11 @@ public class Apartamentos {
 		if (indiceMoradores[meio] != null && indiceMoradores[meio].nome.compareTo(nome) < 0) {
 			return buscaBinariaRecursivaPorNome(nome, meio + 1, fim);
 		} else {
-			return buscaBinariaRecursivaPorNome(nome, ini, meio-1);
+			return buscaBinariaRecursivaPorNome(nome, ini, meio - 1);
 		}
-	
 	}
 
-	// Implementei este método para auxiliar o discente nas suas checagens.
+// Implementei este método para auxiliar o discente nas suas checagens.
 	public void imprimeAptosOrdenadosPorNome() {
 		for (int i = 0; i < this.qtdeAptos; i++) {
 			this.apartamentos[indiceMoradores[i].indice].imprimeDadosReduzidos();
@@ -358,6 +365,18 @@ public class Apartamentos {
 			if (indiceMoradores[i] != null) {
 				System.out.println("" + indiceMoradores[i].nome + " Indice = " + indiceMoradores[i].indice);
 
+			}
+		}
+	}
+	
+	public void imprimeIndiceMoradores() {
+
+		System.out.println("-----------------------------------------------------");
+		System.out.println("INDICE DE MORADORES COM ORDENAÇÃO");
+		for(int i = 0; i < indiceMoradores.length; i++) {
+			if(indiceMoradores[i] != null ) {
+				System.out.println("Nome: " +indiceMoradores[i].nome);
+				System.out.println("Indice: " +indiceMoradores[i].indice+"\n");
 			}
 		}
 	}

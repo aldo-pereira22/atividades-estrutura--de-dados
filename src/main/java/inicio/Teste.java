@@ -2,7 +2,7 @@ package inicio;
 
 public class Teste {
 	
-	 private static final int tamMax = 10;
+	 private static final int tamMax = 8;
 
 	public static void main(String[] args) {
 		
@@ -26,10 +26,24 @@ public class Teste {
       
 
         aps.ordenaAptosPornome();
+        aps.imprimeDadosReduzidos();
+//        aps.imprimeIndiceMoradores();
         
-        int indice = aps.buscaBinariaRecursivaPorNome("Beatriz", 0, aps.indiceMoradores.length -1);
+        Apartamento ap = new Apartamento();
+        
+        ap = aps.buscaBinariaPorNome("Anacleto");
+        
+        if(ap != null) {
+        	System.out.println("Nome: "+ ap.nome);
+        	System.out.println("Nome: "+ ap.numero);
+        	System.out.println("Nome: "+ ap.telefone);
+        }else {
+        	System.out.println("Não encontrou!!");
+        }
+        
 
-        System.out.println("idice =  "+ indice);
+//        int indice = aps.buscaBinariaRecursivaPorNome("JOAO", 0, aps.indiceMoradores.length -1);
+//        System.out.println("idice =  "+ indice);
         //        aps.verIndices();
 //        System.out.println("\n--------------------------------------------------------------------\n");
        
