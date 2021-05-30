@@ -27,9 +27,16 @@ public class Teste {
 
         aps.ordenaAptosPornome();
         
-        aps.verIndices();
-        System.out.println("\n--------------------------------------------------------------------\n");
-        aps.imprimeDadosReduzidos();
+        int indice = aps.buscaBinariaRecursivaPorNome("Beatriz", 0, aps.indiceMoradores.length -1);
+
+        System.out.println("idice =  "+ indice);
+        //        aps.verIndices();
+//        System.out.println("\n--------------------------------------------------------------------\n");
+       
+        
+        
+        
+        
         
 	}
 

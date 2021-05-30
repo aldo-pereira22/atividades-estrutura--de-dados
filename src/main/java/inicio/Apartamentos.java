@@ -3,7 +3,7 @@ package inicio;
 public class Apartamentos {
 
 	private Apartamento[] apartamentos;
-	private IndiceMorador[] indiceMoradores;
+	public IndiceMorador[] indiceMoradores;
 
 	private int qtdeAptos;
 	private int qtdeMaxima;
@@ -179,8 +179,6 @@ public class Apartamentos {
 
 	}
 
-
-
 	/*
 	 * Ordena pelo Método de Inserção o vetor indiceMoradores.
 	 */
@@ -239,14 +237,15 @@ public class Apartamentos {
 //
 //	}
 
-	private void ordenaNomesPorInsercao() {
+	// MÈTODO PARA CRIAR A ORDENAÇÃO no ARRAY DE APARTAMENTOS
+	private void ordenaNomesPorInsercao1() {
 		geraIndiceDeMoradores();
 		Apartamento aux = new Apartamento();
 		int j;
 
 		for (int i = 1; i < apartamentos.length; i++) {
-			if( apartamentos[i] != null) {
-				
+			if (apartamentos[i] != null) {
+
 				aux = apartamentos[i];
 				j = i - 1;
 				while (j >= 0 && (apartamentos[j].nome.compareTo(aux.nome)) > 0) {
@@ -257,7 +256,40 @@ public class Apartamentos {
 			}
 		}
 
+	}
 
+	private void ordenaNomesPorInsercao() {
+//		System.out.println("INDICE DE MORADORES SEM ORDENAÇÃO");
+//		for(int i = 0; i < indiceMoradores.length; i++) {
+//			if(indiceMoradores[i] != null ) {
+//				System.out.println("Nome: " +indiceMoradores[i].nome);
+//			}
+//		}
+
+		IndiceMorador aux = new IndiceMorador();
+		int j;
+
+		for (int i = 1; i < indiceMoradores.length; i++) {
+			if (indiceMoradores[i] != null) {
+
+				aux = indiceMoradores[i];
+				j = i - 1;
+				while (j >= 0 && (indiceMoradores[j].nome.compareTo(aux.nome)) > 0) {
+					indiceMoradores[j + 1] = indiceMoradores[j];
+					j--;
+				}
+				indiceMoradores[j + 1] = aux;
+			}
+		}
+
+//		System.out.println("-----------------------------------------------------");
+//		System.out.println("INDICE DE MORADORES COM ORDENAÇÃO");
+//		for(int i = 0; i < indiceMoradores.length; i++) {
+//			if(indiceMoradores[i] != null ) {
+//				System.out.println("Nome: " +indiceMoradores[i].nome);
+//				System.out.println("Indice: " +indiceMoradores[i].indice+"\n");
+//			}
+//		}
 	}
 
 	/**
@@ -279,11 +311,28 @@ public class Apartamentos {
 	 * return int Se encontrar retorna o índice para o array de apartamentos. Se não
 	 * encontrar retorna um índice inválido (quantidade total de apartamentos).
 	 */
-	private int buscaBinariaRecursivaPorNome(String nome, int ini, int fim) {
+	public int buscaBinariaRecursivaPorNome(String nome, int ini, int fim) {
 		// Deve ser implementado.
 		// Este método deve ser recursivo, ou seja, no lugar de um laço de repetição
 		// implementar uma função recursiva.
-		return 1;
+		
+		
+
+		int meio = ( (int) (ini + fim) / 2);
+		
+		if (ini > fim) {
+			return 99;
+		}
+
+		if (indiceMoradores[meio] != null && indiceMoradores[meio].nome.equals(nome)) {
+			return indiceMoradores[meio].indice;
+		}
+		if (indiceMoradores[meio] != null && indiceMoradores[meio].nome.compareTo(nome) < 0) {
+			return buscaBinariaRecursivaPorNome(nome, meio + 1, fim);
+		} else {
+			return buscaBinariaRecursivaPorNome(nome, ini, meio-1);
+		}
+	
 	}
 
 	// Implementei este método para auxiliar o discente nas suas checagens.
@@ -305,13 +354,14 @@ public class Apartamentos {
 	}
 
 	public void verIndices() {
-        for(int i = 0; i < indiceMoradores.length; i++) {
-        	if(indiceMoradores[i] != null) { 		
-        	System.out.println(""+indiceMoradores[i].nome+" Indice = "+indiceMoradores[i].indice);
+		for (int i = 0; i < indiceMoradores.length; i++) {
+			if (indiceMoradores[i] != null) {
+				System.out.println("" + indiceMoradores[i].nome + " Indice = " + indiceMoradores[i].indice);
 
-        	}
-        }
+			}
+		}
 	}
+
 	public void imprimeDadosReduzidos() {
 		for (int apto = 0; apto < this.qtdeAptos; apto++) {
 			this.apartamentos[apto].imprimeDadosReduzidos();
